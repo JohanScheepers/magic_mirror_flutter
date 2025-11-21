@@ -4,9 +4,13 @@ import 'features/dashboard/dashboard.dart';
 import 'features/weather/weather.dart';
 import 'features/shopping/shopping.dart';
 import 'features/recipes/recipes.dart';
+import 'features/camera/data/camera_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize camera service
+  await CameraService.instance.initialize();
 
   // Initialize weather state and start periodic updates
   WeatherState.initialize();

@@ -10,12 +10,13 @@ class CameraPreviewWidget extends StatefulWidget {
 }
 
 class _CameraPreviewWidgetState extends State<CameraPreviewWidget> {
-  final CameraService _cameraService = CameraService();
+  late final CameraService _cameraService;
   bool _isInitialized = false;
 
   @override
   void initState() {
     super.initState();
+    _cameraService = CameraService.instance;
     _initializeCamera();
   }
 
@@ -23,7 +24,7 @@ class _CameraPreviewWidgetState extends State<CameraPreviewWidget> {
     await _cameraService.initialize();
     if (mounted) {
       setState(() {
-        _isInitialized = true;
+        _isInitialized = _cameraService.isInitialized;
       });
     }
   }

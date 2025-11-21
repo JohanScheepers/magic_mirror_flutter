@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:signals_flutter/signals_flutter.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
+import 'package:vibration/vibration.dart';
 
 class TimerState {
   // State signals
@@ -27,6 +29,7 @@ class TimerState {
   static void pause() {
     isRunning.value = false;
     _timer?.cancel();
+    _stopAlarm();
   }
 
   /// Reset the timer to initial duration
@@ -61,8 +64,31 @@ class TimerState {
         _timer?.cancel();
         isRunning.value = false;
         isDone.value = true;
+        _triggerAlarm();
       }
     });
+  }
+
+  static final _ringtonePlayer = FlutterRingtonePlayer();
+
+  /// Trigger alarm sound and vibration
+  static Future<void> _triggerAlarm() async {
+    // Play alarm sound
+    _ringtonePlayer.playAlarm(
+      looping: true, // Loop until stopped
+      asAlarm: true, // Play as alarm (ignores silent mode if possible)
+    );
+
+    // Vibrate
+    if (await Vibration.hasVibrator()) {
+      Vibration.vibrate(pattern: [500, 1000, 500, 1000], repeat: 1);
+    }
+  }
+
+  /// Stop alarm sound and vibration
+  static void _stopAlarm() {
+    _ringtonePlayer.stop();
+    Vibration.cancel();
   }
 
   /// Format duration as HH:MM:SS

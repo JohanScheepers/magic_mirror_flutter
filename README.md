@@ -11,7 +11,7 @@ A modern smart mirror application built with Flutter that displays real-time inf
 - 📅 **5-Day Forecast** - Comprehensive weather forecast with all available parameters
 - 🕐 **Live Clock** - Always-accurate time and date display
 - 🛒 **Shopping List** - Smart shopping list with frequency-based suggestions
-- ⏲️ **Cooking Timer** - Countdown timer with visual and audio alerts
+- ⏲️ **Cooking Timer** - Countdown timer with visual alarm, sound, and vibration alerts
 - 📖 **Recipes** - Store and view recipes with large text for easy reading while cooking
 - 🧮 **Calculator** - Standard calculator for quick conversions
 - 🔄 **Automatic Updates** - Weather data refreshes every 3 hours automatically
@@ -91,7 +91,7 @@ lib/
 - **Smart suggestions** - System learns from your usage patterns
 
 ### Cooking Features
-- **Timer**: Large, easy-to-read countdown timer. Flashes red when done.
+- **Timer**: Large, easy-to-read countdown timer with sound and vibration alarm when finished.
 - **Recipes**: Store your favorite recipes. Large text mode makes it easy to read from a distance while cooking.
 
 ### Calculator
@@ -181,6 +181,7 @@ For more detailed information about the development process and features, please
 - [Implementation Plan](IMPLEMENTATION_PLAN.md) - Detailed technical plan and architecture
 - [Task Checklist](TASK.md) - Tracking of completed and pending tasks
 - [Walkthrough](WALKTHROUGH.md) - Comprehensive guide to features and implementation details
+- [Camera Implementation](CAMERA_IMPLEMENTATION.md) - Camera singleton pattern and usage across pages
 
 ## License
 

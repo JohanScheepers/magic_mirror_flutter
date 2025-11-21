@@ -1,7 +1,30 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:magic_mirror/features/timer/presentation/state/timer_state.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  // Mock platform channels for FlutterRingtonePlayer and Vibration
+  setUpAll(() {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+          const MethodChannel('flutter_ringtone_player'),
+          (MethodCall methodCall) async {
+            return null; // Mock response
+          },
+        );
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(const MethodChannel('vibration'), (
+          MethodCall methodCall,
+        ) async {
+          if (methodCall.method == 'hasVibrator') {
+            return true;
+          }
+          return null;
+        });
+  });
+
   group('TimerState', () {
     setUp(() {
       TimerState.stop();
